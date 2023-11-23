@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  namespace: roboshop
+  labels:
+    project: roboshop
+    tier: web-tier
+    component: web
+spec:
+  # modify replicas according to your case
+  replicas: 1
+  selector:
+    matchLabels:
+      project: roboshop
+      tier: web-tier
+      component: web
+  template:
+    metadata:
+      labels:
+        project: roboshop
+        tier: web-tier
+        component: web
+    spec:
+      containers:
+      - name: web
+        image: saikiranreddy11/web:1.0.0
+        volumeMounts: 
+          - name: web-configvolume
+            mountPath: /etc/nginx/nginx.conf
+      volumes:
+        - name: web-configvolume
+          configMap:
+            name: web-configmap
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-service
+spec:
+  type: LoadBalancer  
+  selector:
+    project: roboshop
+    tier: web-tier
+    component: web
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+      name: internet-port
+
