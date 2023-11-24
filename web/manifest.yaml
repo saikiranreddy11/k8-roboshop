@@ -141,7 +141,7 @@ spec:
         image: saikiranreddy11/web:1.0.0
         volumeMounts: 
           - name: web-configvolume
-            mountPath: /etc/nginx/nginx.conf
+            mountPath: /etc/nginx/nginx.conf 
       volumes:
         - name: web-configvolume
           configMap:
