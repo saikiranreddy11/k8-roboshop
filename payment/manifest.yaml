@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment
+  namespace: roboshop
+  labels:
+    project: roboshop
+    tier: app
+    component: payment
+spec:
+  # modify replicas according to your case
+  replicas: 1
+  selector:
+    matchLabels:
+      project: roboshop
+      tier: app
+      component: payment
+  template:
+    metadata:
+      labels:
+        project: roboshop
+        tier: app
+        component: payment
+    spec:
+      containers:
+      - name: payment
+        image: saikiranreddy11/payment:1.0.0
+        envFrom:
+        - configMapRef: 
+            name: payment
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: payment
+  namespace: roboshop
+spec:
+  selector:
+    component: payment
+    tier: app
+    project: roboshop
+  ports:
+  - name: payment-port
+    protocol: TCP
+    port: 8080 # this port belongs to service
+    targetPort: 8080 # this port belongs to container
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: payment
+  namespace: roboshop
+data:
+  CART_HOST: "cart"
+  CART_PORT: "8080"
+  USER_HOST: "user"
+  USER_PORT: "8080"
+  AMQP_HOST: "rabbitmq"
+  # AMQP_USER=roboshop
+  # AMQP_PASS=roboshop123 , In the py code , code is writteren for default username and password , so commenting them
+
