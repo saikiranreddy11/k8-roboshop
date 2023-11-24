@@ -55,7 +55,4 @@ data:
   CART_PORT: "8080"
   USER_HOST: "user"
   USER_PORT: "8080"
-  AMQP_HOST: "rabbitmq"
-  # AMQP_USER=roboshop
-  # AMQP_PASS=roboshop123 , In the py code , code is writteren for default username and password , so commenting them
-
+  AMQP_HOST: "rabbitmq" #In the py code , code is writteren for default username and password , so not giving them here 
