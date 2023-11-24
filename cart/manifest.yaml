@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user
+  name: cart
   namespace: roboshop
   labels:
     project: roboshop
     tier: app
-    component: user
+    component: cart
 spec:
   # modify replicas according to your case
   replicas: 1
@@ -14,33 +14,33 @@ spec:
     matchLabels:
       project: roboshop
       tier: app
-      component: user
+      component: cart
   template:
     metadata:
       labels:
         project: roboshop
         tier: app
-        component: user
+        component: cart
     spec:
       containers:
-      - name: user
-        image: saikiranreddy11/user:1.0.0
+      - name: cart
+        image: saikiranreddy11/cart:1.0.0
         envFrom:
         - configMapRef: 
-            name: user
+            name: cart
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: user
+  name: cart
   namespace: roboshop
 spec:
   selector:
-    component: user
+    component: cart
     tier: app
     project: roboshop
   ports:
-  - name: user-port
+  - name: cart-port
     protocol: TCP
     port: 8080 # this port belongs to service
     targetPort: 8080 # this port belongs to container
@@ -48,9 +48,10 @@ spec:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: user
+  name: cart
   namespace: roboshop
 data:
-  MONGO:  "true"
-  MONGO_URL: "mongodb://mongodb:27017/user"
   REDIS_HOST: "redis"
+  CATALOGUE_HOST: "catalogue"
+  CATALOGUE_PORT: "8080"
+
