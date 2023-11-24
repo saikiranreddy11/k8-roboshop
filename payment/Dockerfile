@@ -8,7 +8,5 @@ RUN pip install --upgrade setuptools
 RUN pip install -r requirements.txt
 COPY *.py /app/
 COPY payment.ini /app/
-ENV AMQP_USER=roboshop \
-    AMQP_PASS=roboshop123
 #CMD ["python", "payment.py"]
 CMD ["uwsgi", "--ini", "payment.ini"]
