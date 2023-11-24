@@ -56,3 +56,5 @@ data:
   USER_HOST: "user"
   USER_PORT: "8080"
   AMQP_HOST: "rabbitmq" #In the py code , code is writteren for default username and password , so not giving them here 
+  AMQP_USER: "guest"
+  AMQP_PASS: "guest"
