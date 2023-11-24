@@ -142,6 +142,8 @@ spec:
         volumeMounts: 
           - name: web-configvolume
             mountPath: /etc/nginx/nginx.conf 
+            subPath: config
+            readOnly: true
       volumes:
         - name: web-configvolume
           configMap:
