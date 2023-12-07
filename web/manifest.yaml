@@ -139,10 +139,17 @@ spec:
       containers:
       - name: web
         image: saikiranreddy11/web:1.0.0
+        resources:
+          requests:
+            cpu: "5m"
+            memory: "64Mi"
+          limits:
+            cpu: "25m"
+            memory: "128Mi"
         volumeMounts: 
           - name: web-configvolume
             mountPath: /etc/nginx/nginx.conf 
-            subPath: config
+            subPath: config # this is the key of the configmap
             readOnly: true
       volumes:
         - name: web-configvolume

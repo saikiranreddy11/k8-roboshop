@@ -55,6 +55,9 @@ data:
   CART_PORT: "8080"
   USER_HOST: "user"
   USER_PORT: "8080"
-  AMQP_HOST: "rabbitmq" #In the py code , code is writteren for default username and password , so not giving them here 
+  AMQP_HOST: "rabbitmq" 
   AMQP_USER: "guest"
   AMQP_PASS: "guest"
+
+  #In the py code , code is writteren for default username and password , we did not add the user for the rabbitmq, so going with defaults,
+  #actually , siva sir did not give AMQP_user, AMQP_PASS also in here, it should consider automatically , i think there is some problem in my code  
